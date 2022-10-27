@@ -6,6 +6,9 @@ class heap:
         self.priority=priority #우선순위의 기준이 되는 함수
                                 #값이 높은 것이 높은 우선순위
                                 #기본 우선순위는 기본 크기 비교
+        
+        for i in List: #리스트가 있었다면 어펜드
+            self.push(i)
 
     def push(self,a):
         #밑에 넣고 올라감
@@ -48,6 +51,16 @@ class heap:
                 self.hval[idx],self.hval[idx*2+1]=self.hval[idx*2+1],self.hval[idx]
                 idx=idx*2+1
         return rst
+
+    def newpriority(self,func):
+        List=self.val[1:]
+        self.priority=func
+        self.val=[None]
+        self.hval=[None]
+        self.len=0
+        for i in List:
+            self.push(i)
+        return self
                 
     def __str__(self):
         return str(self.val[1:])
@@ -58,10 +71,12 @@ class heap:
         
 
 
-a=heap(priority= lambda x:(x**2)%4)
+a=heap(priority= lambda x: x)
 for i in [1,4,2,3,5,2,3,1]:
     a.push(i)
 
 print(a)
+
+print(a.newpriority(lambda x : -(x%2)))
 for i in range(9):
 	print(a.pop())

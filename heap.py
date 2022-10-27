@@ -30,6 +30,7 @@ class heap:
             return
         elif self.len==1:
             self.len-=1
+            self.hval.pop()
             return self.val.pop()
         rst= self.val[1]
         self.val[1]=self.val.pop()
@@ -70,9 +71,10 @@ class heap:
         
         
 
+List=[1,4,2,3,5,2,3,1]
 
 a=heap(priority= lambda x: x)
-for i in [1,4,2,3,5,2,3,1]:
+for i in List:
     a.push(i)
 
 print(a)
@@ -80,3 +82,12 @@ print(a)
 print(a.newpriority(lambda x : -(x%2)))
 for i in range(9):
 	print(a.pop())
+
+
+
+b=heap() #이렇게 굳이 힙의 길이로 우선순위를 준다면 힙큐로 큐를 구현할 수도 있긴하다.
+b.newpriority(lambda x : -b.len)
+for i in List:
+    b.push(i)
+for i in List:
+    print(b.pop())
